@@ -1,3 +1,5 @@
-class AppColors {
+import 'dart:ui';
 
+class AppColors {
+  static const scaffoldBgColor = Color(0xffF9FAFB);
 }

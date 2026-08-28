@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_ui/core/app_colors.dart';
 import 'package:food_delivery_ui/router/app_router.dart';
 
 void main() {
@@ -14,7 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Food Delivery app',
       theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        brightness: .light,
+        scaffoldBackgroundColor: AppColors.scaffoldBgColor
       ),
       routerConfig: router,
       builder: (ctx, child) => child!,
