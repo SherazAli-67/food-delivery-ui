@@ -10,46 +10,44 @@ class WelcomeScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: Container(
-        padding: const .symmetric(horizontal: 24.0, vertical: 32),
-        // color: Colors.purple,
-        child: Stack(
-          alignment: .topCenter,
-          fit: .expand,
-          children: [
-            Positioned(
-                top: 0,
-                child: Image.asset(AppIcons.welcomeImg, fit: .cover,)),
-            Positioned(
-                right: 0,
-                child: Text("Skip", style: AppTextStyles.regularTextStyle,)),
-            Positioned(
-                bottom: 32,
-                left: 0,
-                right: 0,
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: .circular(48),
-                    color: AppColors.primaryColor
-                  ),
-                  padding: .symmetric(horizontal: 24, vertical: 32),
+      body: SafeArea(child: Column(
+        mainAxisAlignment: .center,
+        children: [
+          Stack(
+            children: [
+              Image.asset(AppIcons.welcomeImg),
+              Positioned(
+                  right: 0,
+                  top: 32,
+                  child: Text("Skip", style: AppTextStyles.regularTextStyle,)),
+            ],
+          ),
+          Container(
+            margin: .symmetric(horizontal: 24),
+            decoration: BoxDecoration(
+                borderRadius: .circular(48),
+                color: AppColors.primaryColor,
+                image: DecorationImage(image: AssetImage(AppIcons.whiteTexture))
+            ),
+            padding: .symmetric(horizontal: 24, vertical: 32),
+            child: Column(
+              spacing: 46,
+              children: [
+                Padding(
+                  padding: const .symmetric(horizontal: 24.0),
                   child: Column(
-                    spacing: 46,
                     children: [
-                      Column(
-                        children: [
-                          Text("Delicious Food Waiting", style: AppTextStyles.headingTextStyle.copyWith(color: Colors.white), textAlign: .center,),
-                          Text("Welcome to MealMate, whether you're craving the bold flavors, our app has got you covered.", style: AppTextStyles.regularTextStyle.copyWith(fontWeight: .w300, color: Colors.white),textAlign: .center,)
-                        ],
-                      ),
-                      CircularProgressButton()
+                      Text("Delicious Food Waiting", style: AppTextStyles.headingTextStyle.copyWith(color: Colors.white), textAlign: .center,),
+                      Text("Welcome to MealMate, whether you're craving the bold flavors, our app has got you covered.", style: AppTextStyles.regularTextStyle.copyWith(fontWeight: .w300, color: Colors.white),textAlign: .center,)
                     ],
                   ),
-                ))
-          ],
-        ),
+                ),
+                CircularProgressButton()
+              ],
+            ),
+          ),
+        ],
       ))
     );
   }
-
 }
