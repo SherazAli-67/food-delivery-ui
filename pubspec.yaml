@@ -78,6 +78,8 @@ flutter:
   fonts:
     - family: Urbanist
       fonts:
+        - asset: assets/fonts/Urbanist-Thin.ttf
+          weight: 300
         - asset: assets/fonts/Urbanist-Regular.ttf
           weight: 400
         - asset: assets/fonts/Urbanist-Medium.ttf
