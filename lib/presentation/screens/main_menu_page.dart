@@ -19,7 +19,7 @@ class MainMenuPage extends StatelessWidget {
             selectedItemColor: AppColors.primaryColor,
             currentIndex: navigationShell.currentIndex,
             items: [
-              _buildBottomNavigationBarItemWidget(icon: navigationShell.currentIndex == 0 ? AppIcons.icHome : AppIcons.icHomeSelected, label: '', index: 0),
+              _buildBottomNavigationBarItemWidget(icon: navigationShell.currentIndex == 0 ? AppIcons.icHomeSelected : AppIcons.icHome, label: '', index: 0),
               _buildBottomNavigationBarItemWidget(icon: AppIcons.icDelivery, label: '', index: 1),
               _buildBottomNavigationBarItemWidget(icon: AppIcons.icBookmark, label: '', index: 2),
               _buildBottomNavigationBarItemWidget(icon: AppIcons.icProfile, label: '', index: 3),
