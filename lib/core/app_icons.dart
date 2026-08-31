@@ -11,5 +11,7 @@ class AppIcons {
   static const icDelivery = '${_iconsPath}ic_delivery.svg';
   static const icBookmark = '${_iconsPath}ic_bookmark.svg';
   static const icProfile = '${_iconsPath}ic_profile.svg';
+  static const icLocation = '${_iconsPath}ic_location.svg';
+  static const icNotification = '${_iconsPath}ic_notification.svg';
 
 }
