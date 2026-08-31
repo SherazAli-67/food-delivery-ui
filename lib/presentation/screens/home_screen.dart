@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_delivery_ui/core/app_colors.dart';
+import 'package:food_delivery_ui/core/app_data.dart';
 import 'package:food_delivery_ui/core/app_icons.dart';
 import 'package:food_delivery_ui/core/app_textstyles.dart';
 
@@ -11,8 +12,11 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: .symmetric(horizontal: 24, vertical: 32),
-      child: Column(children: [
-        Row(
+      child: Column(
+        crossAxisAlignment: .start,
+          spacing: 24,
+          children: [
+            Row(
           spacing: 16,
           children: [
             Expanded(child: Container(
@@ -38,8 +42,28 @@ class HomeScreen extends StatelessWidget {
               child: SvgPicture.asset(AppIcons.icNotification)
             )
           ],
-        )
+        ),
+            SizedBox(
+              height: 32,
+              child: ListView.separated(
+                  scrollDirection: .horizontal,
+                  itemBuilder: (_, index)=> _buildCategoryItemWidget(index), separatorBuilder: (_, _) => const SizedBox(width: 16,), itemCount: AppData.categories.length),
+            )
       ]),
+    );
+  }
+
+  Widget _buildCategoryItemWidget(int index){
+    bool isSelected = index == 0;
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: .circular(99),
+        color: isSelected ? AppColors.categoryFillColor : Colors.white,
+        border: .all(color: AppColors.borderColor)
+      ),
+      padding: .symmetric(horizontal: 16,),
+      alignment: .center,
+      child: Text(AppData.categories[index], textAlign: .center, style: AppTextStyles.regularTextStyle.copyWith(color: isSelected ? Colors.black : AppColors.lightGreyColor),),
     );
   }
 }
