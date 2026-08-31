@@ -3,6 +3,10 @@ class AppIcons {
 
   static const welcomeImg = '${_iconsPath}welcome_img.png';
   static const whiteTexture = '${_iconsPath}white_texture.png';
+  static const desiFoodImage = '${_iconsPath}desi_food.png';
+  static const thaiFoodImage = '${_iconsPath}thai_food.png';
+  static const healthyFoodImage = '${_iconsPath}healthy_food.png';
+
 
   //svgs
   static const icArrowNext = '${_iconsPath}ic_arrow_next.svg';
