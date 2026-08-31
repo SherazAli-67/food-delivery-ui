@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:food_delivery_ui/presentation/screens/home_screen.dart';
+import 'package:food_delivery_ui/presentation/screens/main_menu_page.dart';
 import 'package:food_delivery_ui/presentation/screens/welcome_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -9,7 +11,7 @@ GoRouter router = GoRouter(
       StatefulShellRoute.indexedStack(
           branches: [
         StatefulShellBranch(routes: [
-          GoRoute(path: NamedRoutes.home.routeName, builder: (_, _)=> Center(child: Text("Home"),))
+          GoRoute(path: NamedRoutes.home.routeName, builder: (_, _)=> HomeScreen())
         ]),
         StatefulShellBranch(routes: [
           GoRoute(path: NamedRoutes.delivery.routeName, builder: (_, _)=> Center(child: Text("Delivery"),))
@@ -24,7 +26,7 @@ GoRouter router = GoRouter(
 
         ]),
       ],
-        builder: (ctx, state, navigationShell) => Center(child: Text("Main Menu page"),)
+        builder: (ctx, state, navigationShell) => MainMenuPage(navigationShell: navigationShell)
       )
     ],
 );
