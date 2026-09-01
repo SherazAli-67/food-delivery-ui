@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:food_delivery_ui/presentation/screens/foods_by_category_page.dart';
 import 'package:food_delivery_ui/presentation/screens/home_screen.dart';
 import 'package:food_delivery_ui/presentation/screens/main_menu_page.dart';
 import 'package:food_delivery_ui/presentation/screens/welcome_screen.dart';
@@ -27,7 +28,8 @@ GoRouter router = GoRouter(
         ]),
       ],
         builder: (ctx, state, navigationShell) => MainMenuPage(navigationShell: navigationShell)
-      )
+      ),
+      GoRoute(path: NamedRoutes.foodByCategory.routeName, builder: (_, state) =>  FoodsByCategoryPage())
     ],
 );
 
@@ -36,7 +38,8 @@ enum NamedRoutes {
   home('/home'),
   delivery('/delivery'),
   bookmark('/bookmark'),
-  profile('/profile')
+  profile('/profile'),
+  foodByCategory('/food-by-category')
   ;
   
   final String routeName;
