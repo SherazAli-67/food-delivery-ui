@@ -6,7 +6,7 @@ import 'package:food_delivery_ui/presentation/screens/welcome_screen.dart';
 import 'package:go_router/go_router.dart';
 
 GoRouter router = GoRouter(
-    initialLocation: NamedRoutes.home.routeName,
+    initialLocation: NamedRoutes.welcome.routeName,
     routes: [
       GoRoute(path: NamedRoutes.welcome.routeName, builder: (_, _)=> WelcomeScreen()),
       StatefulShellRoute.indexedStack(
