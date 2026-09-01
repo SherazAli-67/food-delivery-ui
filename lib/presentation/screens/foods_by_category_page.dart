@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:food_delivery_ui/constants/string_const.dart';
-import 'package:food_delivery_ui/core/models/meal_model.dart';
 import 'package:food_delivery_ui/providers/cart_provider.dart';
 import 'package:provider/provider.dart';
 import '../../core/app_colors.dart';
@@ -9,6 +8,7 @@ import '../../core/app_data.dart';
 import '../../core/app_icons.dart';
 import '../../core/app_textstyles.dart';
 import '../widgets/category_item_widget.dart';
+import '../widgets/meal_item_widget.dart';
 
 class FoodsByCategoryPage extends StatelessWidget{
   const FoodsByCategoryPage({super.key});
@@ -64,40 +64,12 @@ class FoodsByCategoryPage extends StatelessWidget{
                           ),
                           Expanded(child: GridView.builder(
                               itemCount: AppData.meals.length,
-                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisSpacing: 15, crossAxisSpacing: 24, childAspectRatio: 0.77), itemBuilder: (ctx, index){
-                            MealModel meal = AppData.meals[index];
-                            return Stack(
-                              alignment: .center,
-                              children: [
-                                Positioned(bottom: 0, left: 0, right: 0, child: Image.asset(AppIcons.curvedShape),),
-                                Padding(
-                                  padding: .only(left: 12, right: 12, top: 120),
-                                  child: Column(
-                                    crossAxisAlignment: .start,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment: .start,
-                                        spacing: 4,
-                                        children: [
-                                          Text(meal.title, style: AppTextStyles.regularTextStyle.copyWith(fontWeight: .w600),),
-                                          Text(meal.subtitle, style: AppTextStyles.regularTextStyle.copyWith(fontSize: 10, color: AppColors.lightGreyColor),)
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Expanded(child: Text('\$${meal.price}', style: AppTextStyles.regularTextStyle.copyWith(fontWeight: .bold, fontSize: 16),)),
-                                          IconButton(onPressed: ()=> provider.addItemToCart(meal), icon: provider.alreadyInCart(meal) ? Icon(Icons.check_circle_outline_rounded, color: Colors.green,) :  Icon(Icons.add_circle_outline_rounded) )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Positioned(
-                                    top: 0,
-                                    child: Image.asset(meal.image,)),
-                              ],
-                            );
-                          }))
+                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  mainAxisSpacing: 15,
+                                  crossAxisSpacing: 24,
+                                  childAspectRatio: 0.77),
+                              itemBuilder: (ctx, index) => MealItemWidget(meal: AppData.meals[index], provider: provider)))
                         ]),
                     Positioned(
                       bottom: 0,
