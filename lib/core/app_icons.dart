@@ -7,6 +7,11 @@ class AppIcons {
   static const thaiFoodImage = '${_iconsPath}thai_food.png';
   static const healthyFoodImage = '${_iconsPath}healthy_food.png';
 
+  static const thaiFood1 = '${_iconsPath}thai_food1.png';
+  static const thaiFood2 = '${_iconsPath}thai_food2.png';
+  static const thaiFood3 = '${_iconsPath}thai_food3.png';
+  static const thaiFood4 = '${_iconsPath}thai_food4.png';
+  static const curvedShape = '${_iconsPath}curved_shape.png';
 
   //svgs
   static const icArrowNext = '${_iconsPath}ic_arrow_next.svg';
@@ -17,5 +22,6 @@ class AppIcons {
   static const icProfile = '${_iconsPath}ic_profile.svg';
   static const icLocation = '${_iconsPath}ic_location.svg';
   static const icNotification = '${_iconsPath}ic_notification.svg';
+  static const icWallet = '${_iconsPath}ic_wallet.svg';
 
 }

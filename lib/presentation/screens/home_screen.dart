@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
               height: 32,
               child: ListView.separated(
                   scrollDirection: .horizontal,
-                  itemBuilder: (_, index)=> CategoryItemWidget(index: index), separatorBuilder: (_, _) => const SizedBox(width: 16,), itemCount: AppData.categories.length),
+                  itemBuilder: (_, index)=> CategoryItemWidget(category: AppData.categories[index], isSelected: index == 9,), separatorBuilder: (_, _) => const SizedBox(width: 16,), itemCount: AppData.categories.length),
             ),
             Expanded(child: ListView.separated(itemBuilder: (_, index) => FoodItemWidget(food: AppData.foods[index]), separatorBuilder: (ctx, index) => const SizedBox(height: 24,), itemCount: AppData.foods.length))
       ]),
