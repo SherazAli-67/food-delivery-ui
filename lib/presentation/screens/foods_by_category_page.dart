@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:food_delivery_ui/constants/string_const.dart';
 import 'package:food_delivery_ui/providers/cart_provider.dart';
 import 'package:provider/provider.dart';
 import '../../core/app_colors.dart';
 import '../../core/app_data.dart';
 import '../../core/app_icons.dart';
 import '../../core/app_textstyles.dart';
+import '../widgets/cart_pay_bar_widget.dart';
 import '../widgets/category_item_widget.dart';
+import '../widgets/fade_slide_in.dart';
 import '../widgets/meal_item_widget.dart';
 
 class FoodsByCategoryPage extends StatelessWidget{
@@ -26,10 +27,11 @@ class FoodsByCategoryPage extends StatelessWidget{
                 child: Stack(
                   children: [
                     Column(
-                        crossAxisAlignment: .start,
-                        spacing: 24,
-                        children: [
-                          Row(
+                      crossAxisAlignment: .start,
+                      spacing: 24,
+                      children: [
+                        FadeSlideIn(
+                          child: Row(
                             spacing: 16,
                             children: [
                               Expanded(child: Container(
@@ -56,71 +58,45 @@ class FoodsByCategoryPage extends StatelessWidget{
                               )
                             ],
                           ),
-                          SizedBox(
+                        ),
+                        FadeSlideIn(
+                          delay: AppAnimations.sectionGap,
+                          child: SizedBox(
                             height: 32,
                             child: ListView.separated(
                                 scrollDirection: .horizontal,
-                                itemBuilder: (_, index)=> CategoryItemWidget(category: AppData.mealCategories[index], isSelected: index ==0,), separatorBuilder: (_, _) => const SizedBox(width: 16,), itemCount: AppData.mealCategories.length),
+                                itemBuilder: (_, index)=> CategoryItemWidget(category: AppData.mealCategories[index], isSelected: index ==0,),
+                                separatorBuilder: (_, _) => const SizedBox(width: 16,),
+                                itemCount: AppData.mealCategories.length),
                           ),
-                          Expanded(child: GridView.builder(
-                              itemCount: AppData.meals.length,
-                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  mainAxisSpacing: 15,
-                                  crossAxisSpacing: 24,
-                                  childAspectRatio: 0.77),
-                              itemBuilder: (ctx, index) => MealItemWidget(meal: AppData.meals[index], provider: provider)))
-                        ]),
+                        ),
+                        Expanded(
+                          child: GridView.builder(
+                            itemCount: AppData.meals.length,
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 15,
+                                crossAxisSpacing: 24,
+                                childAspectRatio: 0.77),
+                            itemBuilder: (_, index) => FadeSlideIn(
+                              delay: Duration(
+                                milliseconds: AppAnimations.sectionGap.inMilliseconds + 40 + index * AppAnimations.staggerStep.inMilliseconds,
+                              ),
+                              child: MealItemWidget(meal: AppData.meals[index], provider: provider),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                     Positioned(
                       bottom: 0,
                       left: 0,
                       right: 0,
-                      child:  Container(
-                        decoration: BoxDecoration(
-                            color: AppColors.primaryColor,
-                            borderRadius: .circular(12)
-                        ),
-                        padding: .symmetric(horizontal: 16, vertical: 12),
-                        child: Row(
-                          children: [
-                            Row(
-                              spacing: 8,
-                              children: [
-                                Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: .circular(8)
-                                    ),
-                                    padding: .all(8),
-                                    child: SvgPicture.asset(AppIcons.icWallet)
-                                ),
-                                RichText(text: TextSpan(
-                                    text: "Pay | ${provider.getTotalPrice()} ",
-                                    style: AppTextStyles.regularTextStyle.copyWith(fontWeight: .bold, fontSize: 14, fontFamily: StringConst.appFontFamily),
-                                    children: [
-                                      TextSpan(
-                                          text: '${provider.getTotalPriceDouble()}',
-                                          style: AppTextStyles.regularTextStyle.copyWith(fontSize: 10, fontWeight: .w400, fontFamily: StringConst.appFontFamily, decoration: .lineThrough)
-                                      )
-                                    ]
-                                ))
-                              ],
-                            ),
-                            Expanded(
-                              child: Stack(
-                                  alignment: .topRight,
-                                  children: List.generate(provider.cartItems.length, (index){
-                                    String cartItem = provider.cartItems[index].meal.image;
-                                    return index == 0 ? Image.asset(cartItem, height: 40, width: 26,) :  Positioned(
-                                      right: index * 15,
-                                      child: Image.asset(cartItem, height: 40, width: 26,),);
-                                  })
-                              ),
-                            ),
-                          ],
-                        )
-                      )
-                    )
+                      child: FadeSlideIn(
+                        delay: const Duration(milliseconds: 300),
+                        child: CartPayBarWidget(provider: provider),
+                      ),
+                    ),
                   ],
                 ),
               )),
