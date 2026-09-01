@@ -5,6 +5,7 @@ import 'package:food_delivery_ui/core/app_data.dart';
 import 'package:food_delivery_ui/core/app_icons.dart';
 import 'package:food_delivery_ui/core/app_textstyles.dart';
 import 'package:food_delivery_ui/presentation/widgets/category_item_widget.dart';
+import 'package:food_delivery_ui/presentation/widgets/fade_slide_in.dart';
 import 'package:food_delivery_ui/presentation/widgets/food_item_widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -16,43 +17,62 @@ class HomeScreen extends StatelessWidget {
       padding: .symmetric(horizontal: 24, vertical: 32),
       child: Column(
         crossAxisAlignment: .start,
-          spacing: 24,
-          children: [
-            Row(
-          spacing: 16,
-          children: [
-            Expanded(child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: .circular(12)
-              ),
-              padding: .all(16),
-              child: Row(
-                spacing: 8,
-                children: [
-                  SvgPicture.asset(AppIcons.icLocation),
-                  Text("6391 Elgin St., 10299", style: AppTextStyles.regularTextStyle.copyWith(fontWeight: .w300, color: AppColors.lightGreyColor),)
-                ],
-              ),
-            )),
-            Container(
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: .circular(12)
-              ),
-              padding: .all(16),
-              child: SvgPicture.asset(AppIcons.icNotification)
-            )
-          ],
-        ),
-            SizedBox(
+        spacing: 24,
+        children: [
+          FadeSlideIn(
+            child: Row(
+              spacing: 16,
+              children: [
+                Expanded(child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: .circular(12)
+                  ),
+                  padding: .all(16),
+                  child: Row(
+                    spacing: 8,
+                    children: [
+                      SvgPicture.asset(AppIcons.icLocation),
+                      Text("6391 Elgin St., 10299", style: AppTextStyles.regularTextStyle.copyWith(fontWeight: .w300, color: AppColors.lightGreyColor),)
+                    ],
+                  ),
+                )),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: .circular(12)
+                  ),
+                  padding: .all(16),
+                  child: SvgPicture.asset(AppIcons.icNotification)
+                )
+              ],
+            ),
+          ),
+          FadeSlideIn(
+            delay: AppAnimations.sectionGap,
+            child: SizedBox(
               height: 32,
               child: ListView.separated(
                   scrollDirection: .horizontal,
-                  itemBuilder: (_, index)=> CategoryItemWidget(category: AppData.categories[index], isSelected: index == 9,), separatorBuilder: (_, _) => const SizedBox(width: 16,), itemCount: AppData.categories.length),
+                  itemBuilder: (_, index)=> CategoryItemWidget(category: AppData.categories[index], isSelected: index == 9,),
+                  separatorBuilder: (_, _) => const SizedBox(width: 16,),
+                  itemCount: AppData.categories.length),
             ),
-            Expanded(child: ListView.separated(itemBuilder: (_, index) => FoodItemWidget(food: AppData.foods[index]), separatorBuilder: (ctx, index) => const SizedBox(height: 24,), itemCount: AppData.foods.length))
-      ]),
+          ),
+          Expanded(
+            child: ListView.separated(
+              itemBuilder: (_, index) => FadeSlideIn(
+                delay: Duration(
+                  milliseconds: AppAnimations.sectionGap.inMilliseconds + 40 + index * AppAnimations.staggerStep.inMilliseconds,
+                ),
+                child: FoodItemWidget(food: AppData.foods[index]),
+              ),
+              separatorBuilder: (_, _) => const SizedBox(height: 24,),
+              itemCount: AppData.foods.length,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
